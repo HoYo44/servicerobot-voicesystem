@@ -53,7 +53,7 @@ slots:
   product:
     type: text
     influence_conversation: true
-    mapings:
+    mappings:
       - type: from_entity
         entity: product
   service_type:
