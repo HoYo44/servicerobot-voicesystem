@@ -35,8 +35,8 @@ stream.close()
 audio.terminate()
 
 # send to DeepSpeech
-buffer = np.frombuffer(b''.join(frames), dtype=np.init16)
-text = model.stt(np.array(buffer, dtype=np.init16))
+buffer = np.frombuffer(b''.join(frames), dtype=np.int16)
+text = model.stt(np.array(buffer, dtype=np.int16))
 
 # print text
 print("You said: ", text)
