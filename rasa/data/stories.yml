@@ -53,11 +53,11 @@ stories:
     - product: "milk"
   - action: utter_provide_price
 
-  - story: Ask about price with service_type mentioned
-    steps:
-    - intent: ask_service
-      entities:
-      - service_type: "bakery"
-    - slot_was_set:
-      - service_type: "bakery"
-    - action: utter_provide_service_info
+- story: Ask about price with service_type mentioned
+  steps:
+  - intent: ask_service
+    entities:
+    - service_type: "bakery"
+  - slot_was_set:
+    - service_type: "bakery"
+  - action: utter_provide_service_info
