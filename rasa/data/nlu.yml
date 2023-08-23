@@ -89,3 +89,39 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+
+
+- intent: ask_location
+  examples: |
+    - Where can I find the [milk](product)?
+    - Can you tell me the aisle for [bread](product)?
+    - I'm looking for [cereal](product), where is it?
+    - Where do you keep the [eggs](product)?
+
+- intent: ask_stock
+  examples: |
+    - Do you have more [milk](product) in the back?
+    - Are you out of [bread](product)?
+    - Do you have [cereal](product) in stock?
+    - Can you check if you have [eggs](product)?
+
+- intent: ask_price
+  examples: |
+    - How much is this [milk](product)?
+    - What's the price for [bread](product)?
+    - Can you tell me the cost of [cereal](product)?
+    - How much do [eggs](product) cost?
+
+- intent: ask_service
+  examples: |
+    - Do you have a [pharmacy](service_type) here?
+    - Is there a [butcher](service_type) in this store?
+    - Can I find a [bakery](service_type) section here?
+    - Do you offer [home delivery](service_type)?
+
+- intent: ask_hours
+  examples: |
+    - What time do you close?
+    - What are your working hours?
+    - How late is this store open?
+    - What are the store timings?

@@ -28,3 +28,36 @@ stories:
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
+
+- story: Ask product location
+  steps:
+  - intent: ask_location
+  - action: utter_provide_location
+
+- story: Ask about stock
+  steps:
+  - intent: ask_stock
+  - action: utter_check_stock
+
+- story: Ask about store hours
+  steps:
+  - intent: ask_hours
+  - action: utter_provice_hours
+
+- story: Ask about price with product mentioned
+  steps:
+  - intent: ask_price
+    entities:
+    - product: "milk"
+  - slot_was_set:
+    - product: "milk"
+  - action: utter_provide_price
+
+  - story: Ask about price with service_type mentioned
+    steps:
+    - intent: ask_service
+      entities:
+      - service_type: "bakery"
+    - slot_was_set:
+      - service_type: "bakery"
+    - action: utter_provide_service_info
