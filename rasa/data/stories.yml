@@ -42,7 +42,7 @@ stories:
 - story: Ask about store hours
   steps:
   - intent: ask_hours
-  - action: utter_provice_hours
+  - action: utter_provide_hours
 
 - story: Ask about price with product mentioned
   steps:
