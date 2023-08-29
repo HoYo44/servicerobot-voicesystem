@@ -25,3 +25,31 @@
 #         dispatcher.utter_message(text="Hello World!")
 #
 #         return []
+
+# This is a custom action for ServiceRobot
+
+from rasa_sdk import Action
+from rasa_sdk.events import SlotSet
+import pymongo
+
+class ActionGetProductPrice(Action):
+    
+    def name(self) -> str:
+        return "action_get_product_price"
+    
+    def run(self, dispatcher, tracker, domain):
+        product_name = tracker.get_slot("product")
+        # Access to MongoDB
+        client = pymongo.MongoClient("mongodb://localhost:27017/")
+        db = client["supermarketDB"]
+        collection = db["products"]
+
+        # Get product price from MongoDB
+        product_data = collection.find_one({"name": product_name})
+        
+        if product_data and "price" in product_data:
+            price = product_data["price"]
+            dispatcher.utter_message(text=f"The price for {product_name} is {price} THB.")
+        else:
+            dispatcher.utter_message(text="Sorry, I couldn't fetch the price for that product.")
+        return []

@@ -39,11 +39,11 @@ responses:
   - text: "I am a bot, powered by Rasa."
 
   utter_provide_location:
-  - text: "You can find {product} in aisle 5"
+  - text: "You can find {product} in area B"
   utter_check_stock:
   - text: "Let me check the stock for {product}"
   utter_provide_price:
-  - text: "The price for {product} is 5THB"
+  - text: "The price for {product} is 40THB"
   utter_provide_service_info:
   - text: "Yes, we do have a {service_type}."
   utter_provide_hours:
@@ -62,6 +62,10 @@ slots:
     mappings:
       - type: from_entity
         entity: service_type
+  
+actions:
+  - action_get_product_price
+
 
 session_config:
   session_expiration_time: 60

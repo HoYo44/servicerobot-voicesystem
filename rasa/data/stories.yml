@@ -51,7 +51,7 @@ stories:
     - product: "milk"
   - slot_was_set:
     - product: "milk"
-  - action: utter_provide_price
+  - action: action_get_product_price
 
 - story: Ask about price with service_type mentioned
   steps:
