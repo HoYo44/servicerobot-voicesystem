@@ -14,6 +14,6 @@ After installing mongoDB, run following command.
 mongod --dbpath /your/database/path
 ```
 
-## [Voice Command System](./Docs/VoiceCommand.md)
+## [Voice Command System](./VoiceCommand/VoiceCommand.md)
 Voice Command System has two main functions that Voice Recognition and Text-based Chat.
 The objective of this system is to provide service robots with the ability that understanding exactly what the customer is saying and appropriate responses.
