@@ -18,7 +18,7 @@ This system uses virtual environments because each function needs to run on a di
 To create virtual environments, use pip or conda, etc.
 > This repository shows using pip to create virtual environments.
 
-This setup guide assumes operation in the root directory of this repository.\
+This setup guide assumes operation in **the root directory of this repository**.\
 You can see two text files in following locations.
 1. /VoiceCommand/DeepSpeech_env/requirements_deepspeech.txt
 2. /VoiceCommand/Rasa_env/requirements_rasa.txt
