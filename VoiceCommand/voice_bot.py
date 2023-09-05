@@ -11,7 +11,7 @@ app = Flask(__name__)
 model_file_path = './DeepSpeechModels/deepspeech-0.9.3-models.pbmm'
 beam_width = 500
 model = deepspeech.Model(model_file_path)
-model.enableExternalScorer("DeepSpeechModels/deepspeech-0.9.3-models.scorer")
+model.enableExternalScorer("./DeepSpeechModels/deepspeech-0.9.3-models.scorer")
 
 # Microphone Setting
 RATE = 16000

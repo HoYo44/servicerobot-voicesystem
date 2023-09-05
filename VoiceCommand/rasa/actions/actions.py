@@ -39,13 +39,15 @@ class ActionGetProductPrice(Action):
     
     def run(self, dispatcher, tracker, domain):
         product_name = tracker.get_slot("product")
+        print(f"Product Name: {product_name}")
         # Access to MongoDB
-        client = pymongo.MongoClient("mongodb://localhost:27017/")
+        client = pymongo.MongoClient("mongodb://192.168.12.100:27017/")
         db = client["supermarketDB"]
         collection = db["products"]
 
         # Get product price from MongoDB
         product_data = collection.find_one({"name": product_name})
+        print(f"Product Data from MongoDB: {product_data}")
         
         if product_data and "price" in product_data:
             price = product_data["price"]
