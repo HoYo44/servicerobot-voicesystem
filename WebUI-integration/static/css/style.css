@@ -1,0 +1,124 @@
+/* フォント */
+body {
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  
+
+/* 全体のコンテナ */
+.container {
+    display: flex;
+    width: 100%;
+}
+
+/* 左側の部分 */
+.left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 右側の部分 */
+.right {
+    flex: 1;
+    text-align: left;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* タイトル */
+h1 {
+    text-align: center;
+    font-size: 70px;
+}
+
+/* 画像 */
+img {
+    max-width: 100%;
+    height: auto;
+    /* height: 600px; */
+}
+
+/* submitボタン */
+.submit-button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn--orange,
+a.btn--orange {
+  color: #fff;
+  background-color: rgb(10,121,254);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 12px;
+  font-size: 35px;
+}
+.btn--orange:hover,
+a.btn--orange:hover {
+  color: #fff;
+  background: rgb(10,121,254);
+}
+
+
+
+/* ラジオボタンのスタイリング */
+input[type="radio"] {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+    margin-left: 30px;
+}
+/* ラベルのフォントサイズを調整 */
+label {
+    font-size: 50px;
+    vertical-align: middle;
+    margin-left: 30px;
+}
+/* ラジオボタンの丸を大きくする */
+input[type="radio"] {
+    transform: scale(3);
+    margin-bottom: 50px;
+}
+
+/* ラジオボタンとラベルを囲むdiv */
+.radio-wrapper {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border: 3px solid rgb(168, 163, 163);  /* 枠線 */
+    margin-bottom: 20px;  /* 外側の余白（各選択肢間の距離） */
+    border-radius: 10px;  /* 枠線の角を丸く */
+    width: 500px;
+}
+
+/* 選択されたときのスタイル */
+.radio-wrapper.selected {
+    border-color: blue;
+}
+
+/* homeの選択ボタン */
+.center-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.width-button {
+    width: 300px;  /* または好きな幅に設定 */
+    margin-top: 30px;
+}
+
+
+/* videoのセンタリング */
+.video-stream {
+    display: block;
+    margin: auto;
+}
+
+.selected {
+    border: 2px solid blue;
+}
