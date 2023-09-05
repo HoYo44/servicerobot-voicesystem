@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Video Streaming with YOLO</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        function checkStatus() {
+            fetch('/select-source/detection/status')
+                .then(response => response.text())
+                .then(status => {
+                    if (status === "Detection Completed") {
+                        window.location.href = "/select-source/detection/confirm";
+                    }
+                });
+        }
+        setInterval(checkStatus, 1000);  // 1秒ごとにステータスをチェック
+    </script>
+</head>
+<body>
+    <h1>Please, show me what you want</h1>
+    <img src="{{ url_for('videos') }}" alt="Video Stream" class="video-stream">
+</body>
+</html>
