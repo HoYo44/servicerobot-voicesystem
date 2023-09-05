@@ -1,0 +1,3 @@
+[submodule "VoiceCommand/mozilla_tts"]
+	path = VoiceCommand/mozilla_tts
+	url = https://github.com/mozilla/TTS.git
