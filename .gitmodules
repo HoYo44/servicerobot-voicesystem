@@ -1,3 +1,6 @@
 [submodule "VoiceCommand/mozilla_tts"]
 	path = VoiceCommand/mozilla_tts
 	url = https://github.com/mozilla/TTS.git
+[submodule "VoiceCommand/rasa-voice-interface"]
+	path = VoiceCommand/rasa-voice-interface
+	url = https://github.com/RasaHQ/rasa-voice-interface.git
