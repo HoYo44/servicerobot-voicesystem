@@ -34,16 +34,6 @@ stories:
   - intent: ask_location
   - action: utter_provide_location
 
-- story: Ask about stock
-  steps:
-  - intent: ask_stock
-  - action: utter_check_stock
-
-- story: Ask about store hours
-  steps:
-  - intent: ask_hours
-  - action: utter_provide_hours
-
 - story: Ask about price with product mentioned
   steps:
   - intent: ask_price
@@ -52,12 +42,3 @@ stories:
   - slot_was_set:
     - product: "milk"
   - action: action_get_product_price
-
-- story: Ask about price with service_type mentioned
-  steps:
-  - intent: ask_service
-    entities:
-    - service_type: "bakery"
-  - slot_was_set:
-    - service_type: "bakery"
-  - action: utter_provide_service_info

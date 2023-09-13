@@ -9,10 +9,7 @@ intents:
   - mood_unhappy
   - bot_challenge
   - ask_location
-  - ask_stock
   - ask_price
-  - ask_service
-  - ask_hours
 
 entities:
 - product
@@ -40,14 +37,6 @@ responses:
 
   utter_provide_location:
   - text: "You can find {product} in area B"
-  utter_check_stock:
-  - text: "Let me check the stock for {product}"
-  utter_provide_price:
-  - text: "The price for {product} is 40THB"
-  utter_provide_service_info:
-  - text: "Yes, we do have a {service_type}."
-  utter_provide_hours:
-  - text: "Our store hours are from 9am to 9pm."
 
 slots:
   product:

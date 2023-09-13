@@ -90,7 +90,6 @@ nlu:
     - am I talking to a bot?
     - am I talking to a human?
 
-
 - intent: ask_location
   examples: |
     - Where can I find the [orange](product)?
@@ -104,24 +103,17 @@ nlu:
     - What's the price for [bread](product)?
     - Can you tell me the cost of [cereal](product)?
     - How much do [eggs](product) cost?
-
-- intent: ask_service
-  examples: |
-    - Do you have a [pharmacy](service_type) here?
-    - Is there a [butcher](service_type) in this store?
-    - Can I find a [bakery](service_type) section here?
-    - Do you offer [home delivery](service_type)?
-
-- intent: ask_stock
-  examples: |
-    - Do you have more [clothes](product) in the back?
-    - Are you out of [charger](product)?
-    - Do you have [coffee](product) in stock?
-    - Can you check if you have [eggs](product)?
-
-- intent: ask_hours
-  examples: |
-    - What time do you close?
-    - What are your working hours?
-    - How late is this store open?
-    - What are the store timings?
+    - [bottle](product)
+    - [bench](product)
+    - [cup](product)
+    - [umbrella](product)
+    - [bowl](product)
+    - [tie](product)
+    - [suitcase](product)
+    - [clock](product)
+    - [bicycle](product)
+    - [keyboard](product)
+    - [baseball](product)
+    - [coush](product)
+    - [spoon](product)
+    - [tennis racket](product)
