@@ -4,15 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voice Interface</title>
-</head>
-<body>
-    <button onclick="startRecording()">Start Recording</button>
-    <button onclick="stopRecording()">Stop Recording</button>
-    <p id="recordingStatus">Not recording</p>
-    <p id="rasaReply"></p>
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body class="bg-light d-flex justify-content-center align-items-center vh-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="card">
+                    <div class="card-header">
+                        Voice Interface
+                    </div>
+                    <div class="card-body">
+                        <button onclick="startRecording()" class="btn btn-primary">Start Recording</button>
+                        <button onclick="stopRecording()" class="btn btn-danger">Stop Recording</button>
+                        <hr>
+                        <p id="recordingStatus"><strong>Status:</strong> Not recording</p>
+                        <p id="rasaReply"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScriptファイルを読み込む -->
     <script src="frontend_flask.js"></script>
+    <!-- Optional Bootstrap JS (for animations and other features) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
