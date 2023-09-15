@@ -1,0 +1,5 @@
+/* ビデオの最大幅を設定し、ブラウザウィンドウに合わせてリサイズ */
+.video-stream {
+    max-width: 100%;
+    height: auto;
+}
