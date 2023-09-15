@@ -19,3 +19,11 @@ rules:
   steps:
   - intent: ask_price
   - action: action_get_product_price
+
+- rule: Handle product location query
+  condition:
+  - slot_was_set:
+    - product:
+  steps:
+  - intent: ask_location
+  - action: action_get_product_location

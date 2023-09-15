@@ -35,8 +35,6 @@ responses:
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
 
-  utter_provide_location:
-  - text: "You can find {product} in area B"
 
 slots:
   product:
@@ -45,15 +43,10 @@ slots:
     mappings:
       - type: from_entity
         entity: product
-  service_type:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: service_type
   
 actions:
   - action_get_product_price
+  - action_get_product_location
 
 
 session_config:

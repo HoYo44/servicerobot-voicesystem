@@ -6,6 +6,7 @@ from flask_cors import CORS
 from flask import send_file
 from pydub import AudioSegment
 import numpy as np
+import httpx
 
 
 app = Flask(__name__)
@@ -36,11 +37,6 @@ def audio_to_text():
     buffer = io.BytesIO()
     audio.export(buffer, format="wav")
     buffer.seek(0)
-
-    # For debugging: Save the audio to a local file
-    # with open("debug_audio_16bit.wav", "wb") as f:
-    #     f.write(buffer.read())
-    # buffer.seek(0)
 
     # Convert WAV data to PCM
     # audio_wav = AudioSegment.from_wav(buffer)

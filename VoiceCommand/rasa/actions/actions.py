@@ -39,9 +39,10 @@ class ActionGetProductPrice(Action):
     
     def run(self, dispatcher, tracker, domain):
         product_name = tracker.get_slot("product")
-        print(f"Product Name: {product_name}")
+        print(f"Received message with product name: {product_name}")
+        print("ask_price")
         # Access to MongoDB
-        client = pymongo.MongoClient("mongodb://192.168.12.100:27017/")
+        client = pymongo.MongoClient("mongodb://localhost:27017/")
         db = client["supermarketDB"]
         collection = db["products"]
 
@@ -54,4 +55,30 @@ class ActionGetProductPrice(Action):
             dispatcher.utter_message(text=f"The price for {product_name} is {price} THB.")
         else:
             dispatcher.utter_message(text="Sorry, I couldn't fetch the price for that product.")
+        return []
+
+class ActionGetProductLocation(Action):
+
+    def name(self) -> str:
+        return "action_get_product_location"
+    
+    def run(self, dispatcher, tracker, domain):
+        product_name = tracker.get_slot("product")
+        print(f"Received message with product name: {product_name}")
+        print("ask_location")
+
+        # Access to MongoDB
+        client = pymongo.MongoClient("mongodb://localhost:27017/")
+        db = client["supermarketDB"]
+        collection = db["products"]
+
+        # Get product location from MongoDB
+        product_data = collection.find_one({"name": product_name})
+        print(f"Product Data from MongoDB: {product_data}")
+
+        if product_data and "location" in product_data:
+            location = product_data["location"]
+            dispatcher.utter_message(text=f"The location of {product_name} is {location}.")
+        else:
+            dispatcher.utter_message(text="Sorry, I couldn't fetch the location of that product.")
         return []

@@ -29,11 +29,6 @@ stories:
   - intent: deny
   - action: utter_goodbye
 
-- story: Ask product location
-  steps:
-  - intent: ask_location
-  - action: utter_provide_location
-
 - story: Ask about price with product mentioned
   steps:
   - intent: ask_price
@@ -42,3 +37,12 @@ stories:
   - slot_was_set:
     - product: "milk"
   - action: action_get_product_price
+
+- story: Ask about product location
+  steps:
+  - intent: ask_location
+    entities:
+      - product: "milk"
+  - slot_was_set:
+      - product: "milk"
+  - action: action_get_product_location

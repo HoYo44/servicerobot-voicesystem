@@ -14,12 +14,13 @@ function recordAndSend(audioBlob) {
     .then(response => response.text())
     .then(text => {
         // テキストデータをRasaサーバーに送信して応答を取得
+        let parsedText = JSON.parse(text).text;
         return fetch('http://localhost:5001/get_response', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ message: text })
+            body: JSON.stringify({ message: parsedText })
         });
     })
     .then(response => response.text())
