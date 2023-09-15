@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OCR Confirm</title>
+    <script>
+        function sendData() {
+            // ここでサーバに指示を出す
+            const ocrResult = "{{ result }}"; // Flaskから受け取ったresult変数
+            fetch('/send_to_port_9999', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({result: ocrResult})
+            }).then(response => response.json()).then(data => {
+                if (data.status === 'success') {
+                    alert('Data sent to port 9999 successfully');
+                } else {
+                    alert('Failed to send data to port 9999');
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>OCR Result:</h1>
+    <h1>{{ result }}</h1>
+    <img src="{{ url_for('static', filename='image/captured_image.jpg') }}" alt="Captured Image" style="height:500px; width: auto;">
+    <p>Is this OCR result mostly correct?</p>
+    <p>Is you are OK, press the SUBMIT button</p>
+    <button onclick="sendData()">SUBMIT</button>
+    <button onclick="window.location.href='/goto_top'">Back to TOP page</button>
+    <button onclick="window.location.href='/goto_camera'">ReTry</button>
+</body>
+</html>

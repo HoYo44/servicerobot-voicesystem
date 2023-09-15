@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detection Confirm</title>
+</head>
+<body>
+    <h1>Detection Result: {{ result }}</h1>
+    <img src="{{ url_for('static', filename='image/annotated_image.jpg') }}" alt="Annotated Image" style="height: 500px; width: auto;">
+    {% if result != "No detections" %}
+        <ul>
+            {% for item in result.split(", ") %}
+                <li>
+                    {% if item in item_prices %}
+                        <button onclick="sendDataToRosbridge('{{ item }}')">
+                            Go to "{{ item }}" (Price: {{ item_prices[item] }})
+                        </button>
+                    {% else %}
+                        <button disabled>
+                            Go to "{{ item }}" (Out of Stock)
+                        </button>
+                        <span style="color: red;">No Stock</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <button onclick="window.location.href='/goto_top'">Back to TOP page</button>
+    <script>
+        function sendDataToRosbridge(item) {
+            // JavaScriptのFetch APIを使用して非同期通信を行う
+            fetch(`/ros_transmit?type=${item}`, {
+            method: 'GET',  // または 'POST'
+            headers: {
+                'Content-Type': 'application/json'
+            }
+            })
+            .then(response => response.json())  // レスポンスをJSONとして解析
+            .then(data => {
+            if (data.success) {
+                // 成功した場合の処理
+                console.log('Data sent successfully');
+                window.location.href = '/send-ros-complete.html';
+            } else {
+                // 失敗した場合の処理
+                console.log('Failed to send data');
+                window.location.href = '/send-ros-fail.html';
+            }
+            })
+            .catch((error) => {
+            // エラー処理
+            console.error('Error:', error);
+            });
+        }
+    </script>    
+</body>
+</html>
+
