@@ -28,6 +28,8 @@
 
 # This is a custom action for ServiceRobot
 
+from websocket import create_connection
+import json
 from rasa_sdk import Action
 from rasa_sdk.events import SlotSet
 import pymongo
@@ -78,7 +80,13 @@ class ActionGetProductLocation(Action):
 
         if product_data and "location" in product_data:
             location = product_data["location"]
-            dispatcher.utter_message(text=f"The location of {product_name} is {location}.")
-        else:
+
+            # Send location data to ROS bridge server
+            success = send_to_rosbridge(product_name)
+            if success:
+                dispatcher.utter_message(text=f"The location of {product_name} is {location}.")
+            else:
+                dispatcher.utter_message(text=f"The location for {product_name} is {location}, but failed to send to ROS bridge.")
+        else:    
             dispatcher.utter_message(text="Sorry, I couldn't fetch the location of that product.")
         return []
