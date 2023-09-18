@@ -19,6 +19,36 @@ scorer_file_path = './DeepSpeechModels/deepspeech-0.9.3-models.scorer'
 model = deepspeech.Model(model_file_path)
 model.enableExternalScorer(scorer_file_path)
 
+# receive text and sent to ROS bridge server on Jetson Orin
+def send_to_rosbridge(text):
+    # rosbridge url and port
+    ws_url = "ws://192.168.12.100:9090"
+    topic = "/goods_class"
+    message_type = "std_msgs/String"
+
+    try:
+        # Connect to rosbridge
+        ws = create_connection(ws_url)
+        
+        # Message to publish
+        payload = {
+            "op": "publish",
+            "topic": topic,
+            "msg": {
+                "data": text
+            },
+            "type": message_type
+        }
+        
+        # Send message
+        ws.send(json.dumps(payload))
+        ws.close()
+        return True  # Successfully sent the message
+        
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False  # Failed to send the message
+
 @app.route('/')
 def index():
     return app.send_static_file('index.html')
@@ -39,9 +69,7 @@ def audio_to_text():
     buffer.seek(0)
 
     # Convert WAV data to PCM
-    # audio_wav = AudioSegment.from_wav(buffer)
     samples = np.array(audio.get_array_of_samples(), dtype=np.int16)
-    # audio_data = samples.tobytes()
 
     # Use DeepSpeech model to get text
     text = model.stt(samples)
@@ -50,6 +78,7 @@ def audio_to_text():
 
 @app.route('/get_response', methods=['POST'])
 def get_response():
+    global current_product_name
     print("Request data:", request.data)  # Raw request data
     print("Request JSON:", request.json)  # Parsed JSON data
     # Check if 'message' key exists
@@ -63,8 +92,12 @@ def get_response():
 
     # get reply
     reply = rasa_response[0]['text'] if rasa_response else "No response from Rasa server."
+    
+    # Check if the reply contains 'ask_location'
+    if "ask_location:" in reply:
+        current_product_name = reply.split(", product: ")[-1]  # Extract the product name
+        # Now, you can send the product name to ROS bridge or do any other processing if needed.
     return jsonify({"response": reply})
-
 
 @app.route('/text_to_audio', methods=['POST'])
 def text_to_audio():
@@ -82,3 +115,36 @@ def text_to_audio():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
+
+@app.route('/user_response', methods=['POST'])
+def handle_user_response():
+    global current_product_name
+    audio_file = request.files['audio']
+
+    # Convert audio/webm to audio/wav
+    audio = AudioSegment.from_file(io.BytesIO(audio_file.read()), format="webm")
+    audio = audio.set_channels(1).set_frame_rate(16000)
+
+    # Convert the audio to 16-bit PCM
+    audio = audio.set_sample_width(2)  # 2 bytes = 16 bits
+
+    buffer = io.BytesIO()
+    audio.export(buffer, format="wav")
+    buffer.seek(0)
+
+    # Convert WAV data to PCM
+    samples = np.array(audio.get_array_of_samples(), dtype=np.int16)
+
+    # Use DeepSpeech model to get text
+    text = model.stt(samples)
+
+    if "yes" in text and current_product_name:
+        success = send_to_rosbridge(current_product_name)
+        if not success:
+            print(f"Failed to send message to ROS bridge for product: {current_product_name}")
+        else:
+            current_product_name = None
+    elif "no" in text:
+        current_product_name = None
+
+    return jsonify({"response": "Received user response"})

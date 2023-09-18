@@ -25,8 +25,15 @@ function recordAndSend(audioBlob) {
     })
     .then(response => response.text())
     .then(responseText => {
-        // テキスト応答を音声に変換
+        // convert Text to Audio
         document.getElementById("rasaReply").textContent = "Rasa Reply: " + responseText;
+        if (responseText.includes("ask_location:")) {
+            // Wait for user's "yes" or "no" response
+            // Here you might want to show some UI indication to the user to respond
+            // For simplicity, we'll just proceed to record the user's response
+            stopRecording(); // Stop any current recording
+            startRecording(); // Start recording user's response
+        } else {
         return fetch('http://localhost:5001/text_to_audio', {
             method: 'POST',
             headers: {
@@ -71,5 +78,24 @@ function stopRecording() {
     document.getElementById("recordingStatus").textContent = "Not recording";
     if (mediaRecorder && mediaRecorder.state === "recording") {
         mediaRecorder.stop();
+        // Handle the user's response to the location question
+        handleUserResponse(new Blob(audioChunks, { type: 'audio/webm' }));
     }
+}
+
+function handleUserResponse(audioBlob) {
+    let formData = new FormData();
+    formData.append('audio', audioBlob, 'audio.wav');
+
+    fetch('http://localhost:5001/handle_user_response', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        if (data.response) {
+            // Handle the response, such as playing back a confirmation message
+        }
+    });
 }

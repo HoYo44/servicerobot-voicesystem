@@ -34,6 +34,7 @@ from rasa_sdk import Action
 from rasa_sdk.events import SlotSet
 import pymongo
 
+
 class ActionGetProductPrice(Action):
     
     def name(self) -> str:
@@ -44,7 +45,7 @@ class ActionGetProductPrice(Action):
         print(f"Received message with product name: {product_name}")
         print("ask_price")
         # Access to MongoDB
-        client = pymongo.MongoClient("mongodb://localhost:27017/")
+        client = pymongo.MongoClient("mongodb://192.168.12.100:27017/")
         db = client["supermarketDB"]
         collection = db["products"]
 
@@ -54,9 +55,11 @@ class ActionGetProductPrice(Action):
         
         if product_data and "price" in product_data:
             price = product_data["price"]
-            dispatcher.utter_message(text=f"The price for {product_name} is {price} THB.")
+            response_text = f"ask_price: The price for {product_name} is {price} THB. , product: {product_name}"
+            dispatcher.utter_message(text=response_text)
         else:
-            dispatcher.utter_message(text="Sorry, I couldn't fetch the price for that product.")
+            response_text = "ask_price: Sorry, I couldn't fetch the price for that product. , product: None"
+            dispatcher.utter_message(text=response_text)
         return []
 
 class ActionGetProductLocation(Action):
@@ -70,7 +73,7 @@ class ActionGetProductLocation(Action):
         print("ask_location")
 
         # Access to MongoDB
-        client = pymongo.MongoClient("mongodb://localhost:27017/")
+        client = pymongo.MongoClient("mongodb://192.168.12.100:27017/")
         db = client["supermarketDB"]
         collection = db["products"]
 
@@ -80,13 +83,9 @@ class ActionGetProductLocation(Action):
 
         if product_data and "location" in product_data:
             location = product_data["location"]
-
-            # Send location data to ROS bridge server
-            success = send_to_rosbridge(product_name)
-            if success:
-                dispatcher.utter_message(text=f"The location of {product_name} is {location}.")
-            else:
-                dispatcher.utter_message(text=f"The location for {product_name} is {location}, but failed to send to ROS bridge.")
+            response_text = f"ask_location: The location of {product_name} is {location} THB. Would you like me to guide you there?, product: {product_name}"
+            dispatcher.utter_message(text=response_text)
         else:    
-            dispatcher.utter_message(text="Sorry, I couldn't fetch the location of that product.")
+            response_text = "ask_location: Sorry, I couldn't fetch the location of that product. , product: None"
+            dispatcher.utter_message(text=response_text)
         return []
