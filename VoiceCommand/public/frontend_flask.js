@@ -41,7 +41,8 @@ function recordAndSend(audioBlob) {
             },
             body: JSON.stringify({ text: responseText })
         });
-    })
+    }
+})
     .then(response => response.blob())
     .then(audioBlob => {
         // 音声応答を再生
