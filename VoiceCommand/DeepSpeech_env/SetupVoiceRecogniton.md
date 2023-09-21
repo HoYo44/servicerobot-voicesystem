@@ -32,3 +32,7 @@ After activating the virtual environment install the packages for the system req
 pip install -r ./Voice/Command/DeepSpeech_env/requirements_deepspeech.txt
 ```
 - If the installation fails, upgrading the pip version will solve the problem.
+    - Even if failed to install, you should install every libraries in manually.
+```
+pip install deepspeech flask flask_cors requests pydub httpx
+```
