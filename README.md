@@ -4,12 +4,25 @@ This project is the service robot development.
 
 # System Overview
 
+# How to start
+clone this repository into your PC.
+```
+git clone https://github.com/HoYo44/ServiceRobot.git
+```
+
+Add submodule
+```
+git submodule init
+```
+```
+git submodule update
+```
 ## Database
 This system use mongoDB. 
 Database makes it easy to access the same data with each function.
 
-### Launching mongoDB
-After installing mongoDB, run following command.
+### MongoDB
+After installing MongoDB, run following command.
 ```
 mongod --dbpath /your/database/path
 ```
