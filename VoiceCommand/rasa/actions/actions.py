@@ -28,8 +28,6 @@
 
 # This is a custom action for ServiceRobot
 
-from websocket import create_connection
-import json
 from rasa_sdk import Action
 from rasa_sdk.events import SlotSet
 import pymongo
