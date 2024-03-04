@@ -7,7 +7,7 @@ This project is the service robot development.
 # How to start
 clone this repository into your PC.
 ```
-git clone https://github.com/HoYo44/ServiceRobot.git
+git clone https://github.com/HoYo44/servicerobot-voicesystem.git
 ```
 
 Add submodule
